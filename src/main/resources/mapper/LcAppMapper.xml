@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.LcAppMapper">
+
+    <resultMap id="BaseResultMap" type="com.example.demo.domain.LcApp">
+            <result property="id" column="id" jdbcType="BIGINT"/>
+            <result property="appCode" column="app_code" jdbcType="VARCHAR"/>
+            <result property="appName" column="app_name" jdbcType="VARCHAR"/>
+            <result property="appNameEn" column="app_name_en" jdbcType="VARCHAR"/>
+            <result property="appRemark" column="app_remark" jdbcType="VARCHAR"/>
+            <result property="isDeleted" column="is_deleted" jdbcType="CHAR"/>
+            <result property="creator" column="creator" jdbcType="VARCHAR"/>
+            <result property="modifier" column="modifier" jdbcType="VARCHAR"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="lastUpdateTime" column="last_update_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,app_code,app_name,
+        app_name_en,app_remark,is_deleted,
+        creator,modifier,create_time,
+        last_update_time
+    </sql>
+</mapper>
