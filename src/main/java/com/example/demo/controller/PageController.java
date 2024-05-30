@@ -1,6 +1,8 @@
 package com.example.demo.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.example.demo.VO.PageData;
+import com.example.demo.beans.AppVO;
 import com.example.demo.beans.PageVO;
 import com.example.demo.domain.LcApp;
 import com.example.demo.domain.LcPage;
@@ -16,7 +18,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/page")
-@CrossOrigin("http://localhost:5556")
+@CrossOrigin("http://localhost:8000")
 public class PageController {
 
     @Resource
@@ -33,19 +35,21 @@ public class PageController {
      */
     @GetMapping("/list")
     @ResponseBody
-    public List<PageVO> list(@RequestParam("appCode")String appCode){
+    public  BaseResponse<List<PageVO>> list(@RequestParam("appCode")String appCode){
         QueryWrapper<LcPage> wrapper = new QueryWrapper<>();
         LcPage query = new LcPage();
         query.setAppCode(appCode);
         wrapper.setEntity(query);
+        wrapper.orderByDesc("last_update_time");
         List<PageVO> pageVOList = lcPageService.list(wrapper).stream().map(item->{
             PageVO page = new PageVO();
             return page.setPageCode(item.getPageCode())
                     .setAppCode(item.getAppCode())
+                    .setPageName(item.getPageName())
                     .setAssets(item.getPageAssets())
                     .setSchema(item.getPageSchema());
         }).collect(Collectors.toList());
-        return pageVOList;
+        return BaseResponse.success(pageVOList);
     }
 
     /**
